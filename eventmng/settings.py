@@ -3,11 +3,13 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-i_nwu10n8-l42v%k86iyvj8@jplk4ah%pluwki#%wsi$s#_8ya'
 
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']  # Allow all for dev, limit this in production
+ALLOWED_HOSTS = ['*']  # Allow all for development; restrict in production
 
 # Application definition
 INSTALLED_APPS = [
@@ -28,7 +30,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # CORS middleware should be at the top
+    'corsheaders.middleware.CorsMiddleware',  # Must be first for CORS to work properly
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,7 +59,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'eventmng.wsgi.application'
 
-# MySQL Database config
+# MySQL Database Configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -76,7 +78,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-# Password validators
+# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -88,14 +90,16 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
+USE_L10N = True
 USE_TZ = True
 
-# Static files
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
 
+# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Django REST framework configuration
+# Django REST Framework configuration
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
@@ -104,17 +108,17 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
-    ]
+    ],
 }
 
-# CORS settings for React frontend
+# CORS settings (for React frontend integration)
 CORS_ALLOW_ALL_ORIGINS = True
 
-# Email settings (Use console backend for dev, configure SMTP for production)
+# Email backend settings (Gmail SMTP)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'amal007vadakkedath@gmail.com'
-EMAIL_HOST_PASSWORD = 'gkjx knvt wqaw ulhv'  # Use the App Password you generated
+EMAIL_HOST_PASSWORD = 'gkjx knvt wqaw ulhv'  # App password for Gmail
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
